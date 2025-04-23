@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
@@ -57,29 +57,72 @@ const MobileMenuButton = styled.button`
   display: none;
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 28px;
   color: #2d3748;
+  cursor: pointer;
 
   @media (max-width: 768px) {
     display: block;
   }
 `;
 
+const MobileMenu = styled.div`
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  z-index: 99;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+
+  a {
+    font-size: 18px;
+    color: #4a5568;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      color: #6b46c1;
+    }
+  }
+`;
+
 const Header = () => {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
     return (
-        <HeaderContainer>
-            <Logo>mind<span>flow</span></Logo>
-            <Nav>
-                <NavList>
-                    <NavItem><a href="#hero">Главная</a></NavItem>
-                    <NavItem><a href="#blog">Блог</a></NavItem>
-                    <NavItem><a href="#about">Обо мне</a></NavItem>
-                    <NavItem><a href="#newsletter">Подписка</a></NavItem>
-                    <NavItem><a href="#contact">Контакты</a></NavItem>
-                </NavList>
-            </Nav>
-            <MobileMenuButton>☰</MobileMenuButton>
-        </HeaderContainer>
+        <>
+            <HeaderContainer>
+                <Logo>mind<span>flow</span></Logo>
+                <Nav>
+                    <NavList>
+                        <NavItem><a href="#hero">Главная</a></NavItem>
+                        <NavItem><a href="#blog">Блог</a></NavItem>
+                        <NavItem><a href="#about">Обо мне</a></NavItem>
+                        <NavItem><a href="#newsletter">Подписка</a></NavItem>
+                        <NavItem><a href="#contact">Контакты</a></NavItem>
+                    </NavList>
+                </Nav>
+                <MobileMenuButton onClick={() => setIsMobileMenuOpen(prev => !prev)}>
+                    {isMobileMenuOpen ? '✕' : '☰'}
+                </MobileMenuButton>
+            </HeaderContainer>
+
+            {isMobileMenuOpen && (
+                <MobileMenu>
+                    <a href="#hero" onClick={() => setIsMobileMenuOpen(false)}>Главная</a>
+                    <a href="#blog" onClick={() => setIsMobileMenuOpen(false)}>Блог</a>
+                    <a href="#about" onClick={() => setIsMobileMenuOpen(false)}>Обо мне</a>
+                    <a href="#newsletter" onClick={() => setIsMobileMenuOpen(false)}>Подписка</a>
+                    <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>Контакты</a>
+                </MobileMenu>
+            )}
+        </>
     );
 };
 

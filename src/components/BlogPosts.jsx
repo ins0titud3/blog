@@ -4,6 +4,9 @@ import styled from 'styled-components';
 const BlogSection = styled.div`
   width: 100%;
   padding: 0px 100px;
+  @media (max-width: 576px) {
+    padding: 0px 20px;
+  }
 `;
 
 const SectionHeader = styled.div`

@@ -5,7 +5,7 @@ const HeroSection = styled.div`
   display: flex;
   align-items: center;
   min-height: 80vh;
-  padding: 40px;
+  padding: 20px 100px;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4eaff 100%);
 
   @media (max-width: 992px) {
